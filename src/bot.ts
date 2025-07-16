@@ -20,8 +20,6 @@ export default class Bot {
 
 		console.log('Initializing bot...')
 
-		Bot.initialized = true
-
 		Bot.instance = new Telegraf(process.env.BOT_TOKEN!)
 
 		Bot.registerCommands()
@@ -31,7 +29,10 @@ export default class Bot {
 		process.once('SIGINT', () => Bot.instance.stop('SIGINT'))
 		process.once('SIGTERM', () => Bot.instance.stop('SIGTERM'))
 
-		return Bot.instance.launch(() => console.log('Bot initialized'))
+		return Bot.instance.launch(() => {
+			Bot.initialized = true
+			console.log('Bot initialized')
+		})
 	}
 
 	private static registerCommands() {
