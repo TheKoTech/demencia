@@ -14,7 +14,8 @@
 	"main": "src/main.ts",
 	"scripts": {
 		"dev": "tsc --watch",
-		"format": "prettier src/* -w",
+		"format": "prettier src -w",
+		"lint": "eslint src/*.ts",
 		"build": "esbuild src/main.ts --bundle --platform=node --outdir=dist --format=esm --external:dotenv --external:telegraf --external:lowdb",
 		"preview": "node ./dist/main.js"
 	},
@@ -27,6 +28,7 @@
 		"esbuild": "^0.25.6",
 		"eslint": "^9.31.0",
 		"prettier": "^3.6.2",
-		"typescript": "^5.8.3"
+		"typescript": "^5.8.3",
+		"typescript-eslint": "^8.37.0"
 	}
 }
