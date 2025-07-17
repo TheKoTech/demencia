@@ -1,9 +1,8 @@
-import { Context, Middleware } from 'telegraf'
-
-const admins = process.env.ADMINS?.split(',') || []
+import { type Context, type Middleware } from 'telegraf'
+import Bot from '../bot'
 
 export const adminOnly: Middleware<Context> = async (ctx, next) => {
-	if (ctx.from?.id && admins.includes(String(ctx.from?.id))) {
+	if (ctx.from?.id && Bot.admins?.includes(String(ctx.from?.id))) {
 		return next()
 	}
 }

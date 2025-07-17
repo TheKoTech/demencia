@@ -13,10 +13,10 @@
 	"type": "module",
 	"main": "src/main.ts",
 	"scripts": {
-		"dev": "tsc --watch",
 		"format": "prettier src -w",
 		"lint": "eslint src/*.ts",
 		"build": "esbuild src/main.ts --bundle --platform=node --outdir=dist --format=esm --external:dotenv --external:telegraf --external:lowdb",
+		"dev": "npm run build -- --watch",
 		"preview": "node ./dist/main.js"
 	},
 	"dependencies": {

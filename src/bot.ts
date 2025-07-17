@@ -7,6 +7,7 @@ dotenv.config()
 export default class Bot {
 	static instance: Telegraf
 	private static initialized = false
+	static admins = process.env.ADMINS?.split(',')
 
 	static async init() {
 		if (Bot.initialized) throw new Error('Bot must be a singleton')
@@ -38,12 +39,10 @@ export default class Bot {
 	private static registerCommands() {
 		const bot = Bot.instance
 
-		bot.command('start', async ctx => await ctx.reply('common command'))
-		bot.command(
-			'update',
-			adminOnly,
-			async ctx => await ctx.reply('Admin command'),
+		bot.command('start', async ctx =>
+			ctx.reply('common command\n' + ctx.from.id),
 		)
+		bot.command('update', adminOnly, async ctx => ctx.reply('Admin command'))
 	}
 
 	private static handleErrors() {
